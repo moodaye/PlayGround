@@ -15,7 +15,7 @@ import java.util.TreeMap;
 
 import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
 
-public class createQuiz {
+public class createQuiz  {
 
 	public static void main(String[] args) {
 		//1.read file - make sure you have checks if no file is found
