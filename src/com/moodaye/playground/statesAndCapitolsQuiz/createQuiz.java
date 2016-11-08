@@ -82,7 +82,7 @@ public class createQuiz  {
 		
 		for (int i=0; i < questionsArray.length; i++){
 			String state = (String) questionsArray[i];
-			System.out.println("State = " +  state + " Capitol = " + questionsAndAnswers.get(state));
+			System.out.println("States = " +  state + " Capitol = " + questionsAndAnswers.get(state));
 		}
 	}
 	
