@@ -1,4 +1,4 @@
-package com.moodaye.playground.statesAndCapitolsQuiz;
+package com.moodaye.playground.dbAccess;
 import java.sql.*;
 
 public class MysqlJDBCHello {
