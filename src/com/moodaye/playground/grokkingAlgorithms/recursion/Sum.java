@@ -12,6 +12,7 @@ public class Sum {
 		if (numbersToAdd.length == 1) {
 			return sum;
 		}
+		
 		int[] dest = new int[numbersToAdd.length - 1];
 		
 		System.arraycopy(numbersToAdd, 1, dest, 0, numbersToAdd.length - 1);
