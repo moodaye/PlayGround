@@ -1,4 +1,4 @@
-package com.moodaye.playground.grokkingAlgorithms.recursion;
+package com.moodaye.playground.algorithms.grokkingAlgorithms.recursion;
 
 import java.util.ArrayList;
 import java.util.Collections;
