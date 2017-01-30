@@ -52,7 +52,12 @@ public class CircularQueue<T> {
 		}
 	}
 	
+	//TODO - implement offer(T) - returns false if full
+	//TODO - implement poll() - returns null if empty
+	//TODO - implement peek() - returns null if empty
 	
+
+	//TODO - rename to remove and throw unchecked exception if empty
 	//get an item
 	public T nextItem(){
 		return queue.remove(0);
