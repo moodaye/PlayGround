@@ -1,4 +1,4 @@
-package com.moodaye.playground.algorithms.test;
+package com.moodaye.playground.dataStructures.test;
 
 import static org.junit.Assert.*;
 
