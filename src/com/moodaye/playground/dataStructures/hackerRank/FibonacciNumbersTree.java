@@ -42,8 +42,13 @@ public class FibonacciNumbersTree {
 
 	
 	public static void main(String args[]){
-		for (int i = 3; i < 50; i++) {
-			System.out.print(computeFibonacci(i) + ", ");
+		/*for (int i = 3; i < 50; i++) {
+			System.out.print(computeFibonacciNumber(i) + ", ");
+		}*/
+		
+		for (int i = 0; i<10; i++ ){
+			System.out.println("fibo("+i+")= "+getNthfibo(i));
+			System.out.println("fibo("+i+")= "+getNthFibo(i));
 		}
 	}
 
@@ -53,18 +58,110 @@ public class FibonacciNumbersTree {
 	 * @param length
 	 * @return
 	 */
-	public static long computeFibonacci(int length){
-		if (length == 1) return 1;
-		if (length == 2) return 1;
+	public static long[] computeFibonacciArray(int length){
 		
 		long[] fib = new long[length];
 		fib[0] = 1;
+		if (length == 1) return fib;
 		fib[1] = 1;
+		if (length == 2) return fib;
 		
 		for (int i=2; i<length; i++){
 			fib[i] = fib[i-1] + fib[i-2];
 		}
-		return  fib[length-1];
+		return  fib;
+	}
+	
+	public static long computeFibonacciNumber(int n){
+		long x = 0, y=1, aux=0;
+	
+		for (int i=0; i<n; i++){
+			x=y;
+			y=aux;
+			aux = x+y;
+		}
+		return aux;
 	}
 
+	/**
+	 * Copied code from 
+	 * http://codereview.stackexchange.com/questions/51864/calculate-fibonacci-in-olog-n
+	 * 
+	 * @param n
+	 * @return
+	 */
+	public static int getNthFibo(int n){
+		if (n<0){
+			throw new IllegalArgumentException("fibo can't be negative");
+		}
+	
+		if (n <= 1) {
+			return 1;
+		}
+		
+		int[][] result = {{1,0}, {0,1}};
+		int[][] fiboM  = {{1,1}, {1,0}};
+		
+		while (n > 0){
+			if (n%2 == 1){
+				multiMatrix(result, fiboM);
+			}
+			n = n/2;
+			multiMatrix(fiboM, fiboM);
+		}
+		
+		return result[1][0];
+	}
+
+	private static void multiMatrix(int[][] m, int[][] n){
+		int a = m[0][0] * n[0][0] + m[0][1] * n[1][0];
+		int b = m[0][0] * n[0][1] + m[0][1] * n[1][1];
+		int c = m[1][0] * n[0][0] + m[1][1] * n[0][1];
+		int d = m[1][0] * n[0][1] + m[1][1] * n[0][1];
+		
+		m[0][0] = a;
+		m[0][1] = b;
+		m[1][0] = c;
+		m[1][1] = d;
+	}
+	
+	//TODOS
+	//1. fix issue - the fibos are not correct for the linear recurrence method
+	//2. write test cases (junit)
+	//3. generize the multiMatrix to accept nxn matrices - currently only 2x2 supported
+	//4. use long to try to expand the reach
+	
+	public static int getNthfibo(int n) {
+        if (n < 0) {
+            throw new IllegalArgumentException("The fibo value cannot be negative");
+        }
+
+        if (n <= 1) return n;
+
+        int[][] result = {{1, 0}, {0, 1}}; // identity matrix.
+        int[][] fiboM = {{1, 1}, {1, 0}};
+
+        while (n > 0) {
+            if (n%2 == 1) {
+                multMatrix(result, fiboM);
+            }
+            n = n / 2;
+            multMatrix(fiboM, fiboM);
+        }
+
+        return result[1][0];
+    }
+
+    private static void multMatrix(int[][] m, int [][] n) {
+        int a = m[0][0] * n[0][0] +  m[0][1] * n[1][0];
+        int b = m[0][0] * n[0][1] +  m[0][1] * n[1][1];
+        int c = m[1][0] * n[0][0] +  m[1][1] * n[0][1];
+        int d = m[1][0] * n[0][1] +  m[1][1] * n[1][1];
+
+        m[0][0] = a;
+        m[0][1] = b;
+        m[1][0] = c;
+        m[1][1] = d;
+    }	
 }
+

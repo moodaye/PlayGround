@@ -4,17 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Was asked to implement this in an interview.  
- * Basically when the queue is full - new items get added to the top of the queue.
- * When this is the case - let's assume for now that the order will remain FIFO.
- * 
- * So just occured to me as I was writing this code - that a regular queue moves forward - saying you are buying 
- * tickets are a window.   Perhaps a circular queue stays in place ... then - folks occupy the empty seats at the
- * front of the queue after the queue is full.
- * 
- * OK - upon little research realized that the regular queue does not move forward if full?? 
- * 
- * NS - understand the requirements of a circular queue and how it varies from a regular queue.
+ * A circular queue is a regular queue implemented with an array that circles around.
  * 
  * Test Conditions:
  * 		Zero Queue - should return null;
@@ -30,25 +20,29 @@ import java.util.List;
  *
  */
 public class CircularQueue<T> {
+	
+	ArrayList<T> ar = new ArrayList<>();
+	
+	T[] queue; 
 	//TODO - confirm we can or cannot use an array here instead
 	//TODO - ArrayList might not be good choice since it shifts elements to the left upon remove
-	private List<T> queue = new ArrayList(10);
 	private int size = 10;
 
 	//TODO - do we need a default no args constructor?
 	public CircularQueue(int size){
+		//queue = new T[size];
 		this.size = size;
 	}
 	
 	//add an item
 	public void add(T item){
 		
-		if (queue.size() == size){
+		if (queue.length == size){
 			//do nothing for now
 			//TODO - return exception
 		}
 		else{
-			queue.add(item);
+			//queue.add(item);
 		}
 	}
 	
@@ -60,16 +54,17 @@ public class CircularQueue<T> {
 	//TODO - rename to remove and throw unchecked exception if empty
 	//get an item
 	public T nextItem(){
-		return queue.remove(0);
+		return null;
+		//return queue.remove(0);
 	}
 	
 	//how many items?
 	public int size(){
-		return queue.size();
+		return queue.length;
 	}
 	
 	public boolean isFull(){
-		return (size == queue.size() ? true : false);
+		return (size == queue.length ? true : false);
 	}
 	
 }
