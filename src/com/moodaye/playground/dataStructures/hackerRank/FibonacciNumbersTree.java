@@ -96,7 +96,7 @@ public class FibonacciNumbersTree {
 		}
 	
 		if (n <= 1) {
-			return 1;
+			return n;
 		}
 		
 		int[][] result = {{1,0}, {0,1}};
