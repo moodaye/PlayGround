@@ -31,8 +31,8 @@ public class MaxContSubSeq {
 			for (int j=0; j<size; j++){
 				inputArray[j] = in.nextInt();
 			}
-			System.out.print(maxSubSequenceValue(inputArray) + " ");
-//			System.out.print(maxContValNoRecursion(inputArray) + " ");
+//			System.out.print(maxSubSequenceValue(inputArray) + " ");
+			System.out.print(maxContValNoRecursion(inputArray) + " ");
 			int max = 0;
 			Arrays.sort(inputArray);
 			for (int k: inputArray){
@@ -74,10 +74,10 @@ public class MaxContSubSeq {
 		int tempMax = array[0];
 		int maxSoFar = array[0];
 		for (int i=1; i<array.length; i++){
-			tempMax  = array[i] < tempMax + array[i]  ? tempMax + array[i] : array[i];
-//			maxSoFar = maxSoFar > tempMax ? maxSoFar : tempMax;
+			tempMax  = (array[i] < tempMax + array[i])  ? tempMax + array[i] : array[i];
+			maxSoFar = maxSoFar > tempMax ? maxSoFar : tempMax;
 		}
-		return tempMax;
+		return (maxSoFar > tempMax ? maxSoFar : tempMax);
 	}
 	
 	private static int maxContVal(int[] array){
