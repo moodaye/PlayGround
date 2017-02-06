@@ -1,6 +1,7 @@
 package com.moodaye.playground.algorithms.hackerRank.dynamicProgramming;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 
 /**
@@ -12,15 +13,38 @@ import java.util.Arrays;
  *
  * @author Rajiv
  * 
- *
+ *s
  */
 public class MaxContSubSeq {
 
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
-	
-		int[] array = {100,-200,10,98};
-		System.out.println("dd");
-		System.out.println(maxSubSequenceValue(array));
+		
+		Scanner in = new Scanner(System.in);
+		int numberTests = in.nextInt();
+		
+		for (int i=0; i<numberTests; i++){
+			int size = in.nextInt();
+			int[] inputArray = new int[size];
+			for (int j=0; j<size; j++){
+				inputArray[j] = in.nextInt();
+			}
+			System.out.print(maxSubSequenceValue(inputArray) + " ");
+//			System.out.print(maxContValNoRecursion(inputArray) + " ");
+			int max = 0;
+			Arrays.sort(inputArray);
+			for (int k: inputArray){
+				if (k > 0){
+					max += k;
+				}
+			}
+			if (max == 0){
+				max = inputArray[inputArray.length - 1];
+			}
+			System.out.print(max);
+		}
 	}
 	
 	/**
@@ -30,14 +54,30 @@ public class MaxContSubSeq {
 	 * @return
 	 */
 	public static int maxSubSequenceValue(int[] array){
+		//we don't need this - can simply track latest max.
 		int[] mxValByIndx = new int[array.length];
 		
+		
+		
 		for (int i=0; i<array.length; i++){
-			mxValByIndx[i] = maxContVal(Arrays.copyOf(array,i+1));
+//			mxValByIndx[i] = maxContVal(Arrays.copyOf(array,i+1));
+			mxValByIndx[i] = maxContValNoRecursion(Arrays.copyOf(array,i+1));
 		}
 		//return max element in mxValByIndx 
 		Arrays.sort(mxValByIndx);
 		return mxValByIndx[array.length-1];
+	}
+	
+	public static int maxContValNoRecursion(int[] array){
+		if ((array.length) == 1) return array[0];
+		
+		int tempMax = array[0];
+		int maxSoFar = array[0];
+		for (int i=1; i<array.length; i++){
+			tempMax  = array[i] < tempMax + array[i]  ? tempMax + array[i] : array[i];
+//			maxSoFar = maxSoFar > tempMax ? maxSoFar : tempMax;
+		}
+		return tempMax;
 	}
 	
 	private static int maxContVal(int[] array){
