@@ -2,6 +2,14 @@ package com.moodaye.playground.algorithms.hackerRank.rookie2;
 
 public class Problem4 {
 	
+	public static void main(String[] args){
+		Coordinate startingSquare = new Coordinate(0, 0);
+		Coordinate targetSquare = new Coordinate(4,4);
+		
+		KnightProblem kp = new KnightProblem(startingSquare, 5, 1, 2, targetSquare);
+		System.out.println(kp.solve());
+	}
+	
 	
 
 }
@@ -24,7 +32,7 @@ class KnightProblem{
 		this.stepy = stepy;
 		solution = new int[gridSize][gridSize];
 		this.targetSquare = targetSquare;
-		minStepsToSolution = -1;
+		minStepsToSolution = Integer.MAX_VALUE;
 	}
 	
 	
@@ -42,44 +50,23 @@ class KnightProblem{
 		Coordinate newPosition3 = Coordinate.add(currentPosition,  stepx,-stepy);
 		Coordinate newPosition4 = Coordinate.add(currentPosition, -stepx,-stepy);
 		
-		if ( newPosition1 != null){
-			if (newPosition1.equals(targetSquare)){
-				minStepsToSolution = numberOfSteps;
-				return;
-			}
-			else if (solution[newPosition1.getX()][newPosition1.getY()] == 1){
-				return;
-			}
-			solution[newPosition1.getX()][newPosition1.getY()] = 1;
-			solve(newPosition1, numberOfSteps);
-		}
-	
-		if ( newPosition2 != null){
-			if (newPosition1.equals(targetSquare)){
-				minStepsToSolution = numberOfSteps;
-				return;
-			}
-			else if (solution[newPosition2.getX()][newPosition2.getY()] == 1){
-				return;
-			}
-			solution[newPosition2.getX()][newPosition2.getY()] = 1;
-			solve(newPosition2, numberOfSteps);
-		}
-		if ( newPosition3 != null){
-			if (newPosition3.equals(targetSquare)){
-				minStepsToSolution = numberOfSteps;
-				return;
-			}
-			solve(newPosition3, numberOfSteps);
-		}
-		if ( newPosition4 != null){
-			if (newPosition4.equals(targetSquare)){
-				minStepsToSolution = numberOfSteps;
-				return;
-			}
-			solve(newPosition4, numberOfSteps);
-		}
+		checkNewPositionAndSolve(newPosition1, numberOfSteps);
+		checkNewPositionAndSolve(newPosition2, numberOfSteps);
+		checkNewPositionAndSolve(newPosition3, numberOfSteps);
+		checkNewPositionAndSolve(newPosition4, numberOfSteps);
 		
+	}
+	
+	private void checkNewPositionAndSolve(Coordinate newPosition, int numberOfSteps){
+		 if( newPosition != null){
+			if (newPosition.equals(targetSquare)){
+				minStepsToSolution = numberOfSteps;
+			}
+			else if (solution[newPosition.getX()][newPosition.getY()] > numberOfSteps){
+				solution[newPosition.getX()][newPosition.getY()] = numberOfSteps;
+				solve(newPosition, numberOfSteps);
+			}
+		}
 	}
 }
 
