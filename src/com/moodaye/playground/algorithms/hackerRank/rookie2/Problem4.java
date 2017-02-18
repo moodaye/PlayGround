@@ -1,13 +1,24 @@
 package com.moodaye.playground.algorithms.hackerRank.rookie2;
 
+import java.util.Scanner;
+
 public class Problem4 {
 	
 	public static void main(String[] args){
-		Coordinate startingSquare = new Coordinate(0, 0);
-		Coordinate targetSquare = new Coordinate(4,4);
 		
-		KnightProblem kp = new KnightProblem(startingSquare, 5, 1, 2, targetSquare);
-		System.out.println(kp.solve());
+		Scanner in = new Scanner(System.in);
+		int gridSize = in.nextInt();
+		
+		Coordinate startingSquare = new Coordinate(0, 0, gridSize-1, gridSize-1);
+		Coordinate targetSquare = new Coordinate(gridSize-1, gridSize-1, gridSize-1, gridSize-1);
+	
+		for (int i=1; i<gridSize; i++){
+			for (int j=1; j<gridSize; j++){
+				KnightProblem kp = new KnightProblem(startingSquare, 25, i, j, targetSquare);
+				System.out.print(kp.solve() + " ");
+			}
+			System.out.println();
+		}
 	}
 	
 	
@@ -34,11 +45,18 @@ class KnightProblem{
 		//for (int i: solution) solution[i][i] = Integer.MAX_VALUE;
 		this.targetSquare = targetSquare;
 		minStepsToSolution = Integer.MAX_VALUE;
+		
+		for (int i=0; i<gridSize; i++) 
+			for(int j=0; j<gridSize; j++) 
+				solution[i][j] = Integer.MAX_VALUE;
 	}
 	
 	
 	public int solve(){
 		solve(startingSquare, 0);
+		if (minStepsToSolution == Integer.MAX_VALUE){
+			minStepsToSolution = -1;
+		}
 		return minStepsToSolution;
 	}
 	
@@ -46,15 +64,23 @@ class KnightProblem{
 		
 		if (++numberOfSteps >= minStepsToSolution) return;
 		
-		Coordinate newPosition1 = Coordinate.add(currentPosition,  stepx, stepy);
-		Coordinate newPosition2 = Coordinate.add(currentPosition, -stepx, stepy);
-		Coordinate newPosition3 = Coordinate.add(currentPosition,  stepx,-stepy);
-		Coordinate newPosition4 = Coordinate.add(currentPosition, -stepx,-stepy);
+		Coordinate newPosition1 = Coordinate.add(currentPosition,  stepx,  stepy);
+		Coordinate newPosition2 = Coordinate.add(currentPosition, -stepx,  stepy);
+		Coordinate newPosition3 = Coordinate.add(currentPosition,  stepx, -stepy);
+		Coordinate newPosition4 = Coordinate.add(currentPosition, -stepx, -stepy);
+		Coordinate newPosition5 = Coordinate.add(currentPosition,  stepy,  stepx);
+		Coordinate newPosition6 = Coordinate.add(currentPosition, -stepy,  stepx);
+		Coordinate newPosition7 = Coordinate.add(currentPosition,  stepy, -stepx);
+		Coordinate newPosition8 = Coordinate.add(currentPosition, -stepy, -stepx);
 		
 		checkNewPositionAndSolve(newPosition1, numberOfSteps);
 		checkNewPositionAndSolve(newPosition2, numberOfSteps);
 		checkNewPositionAndSolve(newPosition3, numberOfSteps);
 		checkNewPositionAndSolve(newPosition4, numberOfSteps);
+		checkNewPositionAndSolve(newPosition5, numberOfSteps);
+		checkNewPositionAndSolve(newPosition6, numberOfSteps);
+		checkNewPositionAndSolve(newPosition7, numberOfSteps);
+		checkNewPositionAndSolve(newPosition8, numberOfSteps);
 		
 	}
 	
@@ -76,12 +102,37 @@ class KnightProblem{
 class Coordinate{
 	int x;
 	int y;
+	int maxX = Integer.MAX_VALUE;
+	int maxY = Integer.MAX_VALUE;
 	
 	Coordinate(int x, int y){
 		this.x = x;
 		this.y = y;
 	}
 	
+	Coordinate(int x, int y, int maxX, int maxY){
+		this.x = x;
+		this.y = y;
+		this.maxX = maxX;
+		this.maxY = maxY;
+	}
+	
+	public int getMaxX() {
+		return maxX;
+	}
+
+	public void setMaxX(int maxX) {
+		this.maxX = maxX;
+	}
+
+	public int getMaxY() {
+		return maxY;
+	}
+
+	public void setMaxY(int maxY) {
+		this.maxY = maxY;
+	}
+
 	public boolean equals(Object o){
 		if (o == null) return false;
 		if (o.getClass() != Coordinate.class) return false;
@@ -113,7 +164,8 @@ class Coordinate{
 		int yCoord = c.y + b;
 		
 		if (xCoord < 0 || yCoord < 0) return null;
+		if (xCoord > c.maxX || yCoord > c.maxY) return null;
 				
-		return new Coordinate(c.x + a, c.y +b);
+		return new Coordinate(c.x + a, c.y +b, c.maxX, c.maxY);
 	}
 }
