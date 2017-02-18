@@ -50,10 +50,10 @@ public class SeparateTheNumbers {
 		
 		anchor++;
 		index++;
-		while(index == s.indexOf(anchor, index))
+	/*	while(index == s.indexOf(anchor, index))
 			index += String.valueOf(++anchor);
 		
-		
+		*/
 		
 		
 		

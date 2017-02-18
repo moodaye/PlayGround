@@ -28,7 +28,7 @@ public class Graph {
 	public Graph(InputStream in){
 		Scanner input = new Scanner(in);
 		while(input.hasNext()){
-			nodes.add(input.nextInt());
+			//nodes.add(input.nextInt());
 		}
 	}
 	
