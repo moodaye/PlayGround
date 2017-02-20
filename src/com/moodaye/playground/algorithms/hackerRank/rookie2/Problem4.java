@@ -42,7 +42,6 @@ class KnightProblem{
 		this.stepx = stepx;
 		this.stepy = stepy;
 		solution = new int[gridSize][gridSize];
-		//for (int i: solution) solution[i][i] = Integer.MAX_VALUE;
 		this.targetSquare = targetSquare;
 		minStepsToSolution = Integer.MAX_VALUE;
 		
