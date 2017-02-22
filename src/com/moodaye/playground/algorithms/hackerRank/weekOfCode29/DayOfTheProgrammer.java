@@ -1,4 +1,4 @@
-package com.moodaye.playground.hackerrank.weekOfCode29;
+package com.moodaye.playground.algorithms.hackerRank.weekOfCode29;
 
 import java.util.Scanner;
 
