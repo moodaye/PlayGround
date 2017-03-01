@@ -107,8 +107,10 @@ public class CircleAndASquare {
 		double A2 = Math.sqrt(u2*(u2-a23)*(u2-b2)*(u2-b3));
 		double A3 = Math.sqrt(u3*(u3-a34)*(u3-b3)*(u3-b4));
 		double A4 = Math.sqrt(u4*(u4-a41)*(u4-b4)*(u4-b1));
+	
+		double total = A1+A2+A3+A4;
 		
-		if ((A1+A2+A3+A4) > A)
+		if (Math.floor(total*1000) > Math.floor(A*1000))
 			return false;
 		else
 			return true;
@@ -147,19 +149,21 @@ public class CircleAndASquare {
 	}
 	
 	public static void main(String[] args) {
-//		CircleAndASquare cas = new CircleAndASquare(3,3,5,5,2,0,0,2,2);
-		CircleAndASquare cas = new CircleAndASquare(4,4,5,5,2,0,0,3,3);
+//		CircleAndASquare cas = new CircleAndASquare(3,3,5,5,2,-3,0,-1,2);
+//		CircleAndASquare cas = new CircleAndASquare(4,4,5,5,2,0,0,3,3);
 //		CircleAndASquare cas = new CircleAndASquare(11,11,5,5,2,0,0,3,3);
+//		CircleAndASquare cas = new CircleAndASquare(11,11,5,5,5,2,2,2,8);
+//		CircleAndASquare cas = new CircleAndASquare(2,2,5,5,5,0,0,1,2);
 
-//		CircleAndASquare cas = new CircleAndASquare(20,16,9,6,5,16,14,8,14);
-//		CircleAndASquare cas = new CircleAndASquare(16,5,1,1,1,2,15,2,15);
+//		CircleAndASquare cas = new CircleAndASquare(20,16,9,6,5,4,14,-4,14);
+		CircleAndASquare cas = new CircleAndASquare(100,100,50,50,40,2,15,2,15);
 //		CircleAndASquare cas = new CircleAndASquare(3,3,3,2,1,0,0,2,0);
 //		cas.paintCircle();
 //		cas.printRaster();
-//		cas.paintCircle();
-		cas.paintSquare();
+		cas.paintCircle();
+//		cas.paintSquare();
 	//	cas.paintCircleAndSquare();
 		cas.printRaster();
-	//	cas.printSquareVertices();
+//		cas.printSquareVertices();
 	}
 }
