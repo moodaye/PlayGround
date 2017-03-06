@@ -6,6 +6,21 @@ import org.junit.Test;
 
 public class SortingTest {
 	
+	@Test
+	public void testCountingSort1(){
+		int[] a = {4,3,1};
+		Sorting.countingSort(a,  0,  10);
+		int[] expected = {1,3,4};
+		assertArrayEquals(expected, a);
+		
+		int[] b = {10,-1, 2, 2, 4, 5};
+		Sorting.countingSort(b, -1, 10);
+		int[] b_expected = {-1,2,2,4,5,10};
+		assertArrayEquals(b_expected, b);
+		
+		
+	}
+	
 	@Test 
 	public void testMergeSortArrayOfInts(){
 		int[] a = {3,1,2};
@@ -54,7 +69,7 @@ public class SortingTest {
 	public void test1() {
 		int[] a = {4,3,2,19};
 		Sorting.insertionSort(a);
-		printArray(a);
+	//	printArray(a);
 	}
 	
 	private void printArray(int[] a){

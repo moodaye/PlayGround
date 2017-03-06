@@ -16,10 +16,13 @@ import java.util.Comparator;
  *
  */
 public class Sorting<T> {
-	
+
+	/**Insertion sort for collection */
 	public static <T> Iterable<T> insertionSort(Iterable<T> t){
 		return null;
 	}
+	
+	/**Insertion sort - array of primitives (int) */
 	public static void insertionSort(int[] a){
 		for (int i=0; i<a.length; i++){
 			int temp = a[i];
@@ -31,6 +34,7 @@ public class Sorting<T> {
 		}
 	}
 	
+	/**Selection sort - array of primitives (int) */
 	public static void selectionSort(int[] a){
 		for(int i=0; i<a.length-1; i++){
 			int index = i;
@@ -47,6 +51,7 @@ public class Sorting<T> {
 		return null;
 	}
 	
+	/**Selection sort - array of primitives (int) */
 	public static void bubbleSort(int[] a){
 		int j;
 		boolean flag = true;
@@ -64,16 +69,19 @@ public class Sorting<T> {
 		}
 	}
 	
+	/**Selection sort - Collection */
 	public static <T> Iterable<T> bubbleSort(Iterable<T> t){
 		return null;
 	}
-	
+
+	/** Quick sort - array of primitives */
 	public static void quickSort(int[] a){
 		//randomize e.g., StdRandom.shuffle(a);
 		quickSort(a,0,a.length-1);
 		//assert isSorted(a);
 	}
 	
+	/** Quick sort helper??*/
 	private static void quickSort(int[] a, int lo, int hi){
 		if (hi <= lo) return;
 		int j = partition(a, lo, hi);
@@ -138,10 +146,6 @@ public class Sorting<T> {
 		}
 	}
 	
-	
-	
-	
-	
 	/** merge sort implementation using collection of generics */
 // 	public static <T> Iterable<T> mergeSort(Iterable<T> s, Comparator<T> comp){
 	
@@ -178,12 +182,24 @@ public class Sorting<T> {
 	public static <T> Iterable<T> heapSort(Iterable<T> t){
 		return null;
 	}
+
+	/** Also called bucket sort */
+	/** assumes input are ints in the inclusive range provided */
+	public static void countingSort(int[] a, int range_low, int range_high){
+		int[] b = new int[range_high - range_low + 1];
 	
-	public static int[] countingSort(int[] a){
-		return a;
-	}
-	public static <T> Iterable<T> countingSort(Iterable<T> t){
-		return null;
+		int adjustment = 0; //to deal with negative integers
+		if (range_low < 0)
+			adjustment = range_low * -1;
+			
+		
+		for (int i=0; i<a.length; i++)
+			b[a[i] + adjustment]++;
+	
+		int j=0;
+		for (int i=0; i<b.length; i++)
+			while ( b[i]-- > 0)
+				a[j++] = i - adjustment;
 	}
 	
 	public static int[] radixSort(int[] a){
