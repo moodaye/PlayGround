@@ -26,7 +26,7 @@ public class Graph {
 	 * @param in
 	 */
 	public Graph(InputStream in){
-		
+
 	}
 	
 	public  void addEdge(int u, int v){

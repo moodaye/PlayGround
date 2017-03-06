@@ -10,7 +10,7 @@ public class CircleAndASquareTest {
 	@Test
 	public void test1() {
 		
-		CircleAndASquare cas = new CircleAndASquare(11, 11, 5, 5, 5);
+		CircleAndASquare cas = new CircleAndASquare(11, 11, 5, 5, 5, 0, 0, 0, 0);
 		cas.printRaster();
 		char[][] raster = cas.getRaster();
 		
@@ -23,7 +23,7 @@ public class CircleAndASquareTest {
 	
 	@Test
 	public void test2(){
-		CircleAndASquare cas = new CircleAndASquare(11, 11, 5, 5, 5);
+		CircleAndASquare cas = new CircleAndASquare(11, 11, 5, 5, 5, 0, 0, 0, 0);
 		cas.paintCircle();
 		cas.printRaster();
 		char[][] raster = cas.getRaster();
