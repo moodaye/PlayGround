@@ -24,7 +24,7 @@ public class Sorting<T> {
 	
 	/**Insertion sort - array of primitives (int) */
 	public static void insertionSort(int[] a){
-		for (int i=0; i<a.length; i++){
+		for (int i=1; i<a.length; i++){
 			int temp = a[i];
 			int j;
 			for (j=i-1; j>=0 && temp<a[j]; j--){
@@ -74,6 +74,8 @@ public class Sorting<T> {
 		return null;
 	}
 
+	//QuickSort ************************************************
+	
 	/** Quick sort - array of primitives */
 	public static void quickSort(int[] a){
 		//randomize e.g., StdRandom.shuffle(a);
@@ -81,34 +83,39 @@ public class Sorting<T> {
 		//assert isSorted(a);
 	}
 	
-	/** Quick sort helper??*/
 	private static void quickSort(int[] a, int lo, int hi){
-		if (hi <= lo) return;
-		int j = partition(a, lo, hi);
-		quickSort(a, lo, j-1);
-		quickSort(a, j+1, hi);
-		//assert isSorted(a, lo, hi);
+		int index = partition(a, lo, hi);
+		if (lo < index -1)
+			quickSort(a, lo, index-1);
+		if (index < hi)
+			quickSort(a, index, hi);
 	}
 
-	// partition the subarray a[lo...hi] so that
-	// a[lo..j-1] <= a[j] <= a[j+1..hi]
 	private static int partition(int[] a, int lo, int hi){
-		int i = lo; 
-		int j = hi + 1;
-		int v = a[lo];
-		while(true){
-			break;
-			//find item on lo to swap
-//			while(less([++i],v))
-//				if (i == hi) break;
-				
+		int pivot = a[(lo+hi)/2];
+		while(lo <= hi){
+			while(a[lo] < pivot) lo++;
+			while(a[hi] > pivot) hi--;
+			if(lo<=hi){
+				swap(a,lo,hi);
+				lo++;
+				hi--;
+			}
 		}
-		return 0;
+		return lo;
+	}
+	
+	private static void swap(int[] a,int lo,int hi){
+		int temp = a[lo];
+		a[lo] = a[hi];
+		a[hi] = temp;
 	}
 
 	public static <T> Iterable<T> quickSort(Iterable<T> t){
 		return null;
 	}
+	
+	// ************************************************
 	
 	//MERGE ************************************************
 	
@@ -176,13 +183,43 @@ public class Sorting<T> {
 	
 	// ************************************************
 	
-	public static int[] heapSort(int[] a){
-		return a;
+	// Heap Sort **************************************
+	public static void heapSort(int[] a){
+		int n = a.length;
+		for (int k = n/2; k>=1; k--)
+			sink(a, k, n);
+		while(n > 1){
+			exch(a, 1, n--);
+			sink(a, 1, n);
+		}
 	}
+	
+	private static void sink(int[] a, int k, int n){
+		while(2*k <= n){
+			int j = 2*k;
+			if (j < n && less(a, j, j+1)) j++;
+			if (!less(a, k, j)) break;
+			exch(a, k, j);
+			k=j;
+		}
+	}
+	
+	private static boolean less(int[] a, int i, int j){
+		return a[i-1] -a[j-1] < 0;
+	}
+	
+	private static void exch(int[] a, int i, int j){
+		int temp = a[i-1];
+		a[i-1] = a[j-1];
+		a[j-1] = temp;
+	}
+	
 	public static <T> Iterable<T> heapSort(Iterable<T> t){
 		return null;
 	}
+	// ************************************************
 
+	// Counting Sort***********************************
 	/** Also called bucket sort */
 	/** assumes input are ints in the inclusive range provided */
 	public static void countingSort(int[] a, int range_low, int range_high){
@@ -201,13 +238,51 @@ public class Sorting<T> {
 			while ( b[i]-- > 0)
 				a[j++] = i - adjustment;
 	}
-	
-	public static int[] radixSort(int[] a){
-		return a;
-	}
-	public static <T> Iterable<T> radixSort(Iterable<T> t){
-		return null;
-	}
-	
 
+	// Radix sort ***********************************
+	public static void radixSort(int[] a){
+		//establish upper bound 	
+		int max = Integer.MIN_VALUE;
+		for(int i=0; i<a.length; i++)
+			if (a[i] > max) max = a[i];
+		
+		//sort by digit.  e.g.,
+		// given 9203; 4012; 4839; 8749 
+		// after first digit --> 4012; 9203; 4839; 8749
+		// after second digit --> 9203; 4012; 4839; 8749
+		// after third digit --> 4012; 9203; 8749; 4839
+		// after fourth digit --> 4012; 4839; 8749; 9203
+		//
+		// for each of the above iterations - we can use a counting sort
+		// for the ones place - do a % 10
+		// e.g., 9203 / 1     = 9203; 9203 % 10 = 3
+		//       9203 / 10    = 920;   920 % 10 = 0
+		//       9203 / 100   = 92;     92 % 10 = 2
+		//       9203 / 1000  = 9;       9 % 10 = 9
+	
+		int count[];
+		for (int exp=1; max/exp > 0; exp *= 10){
+			count = new int[10];
+			for (int i=0; i<a.length; i++)
+				count[(a[i] / exp) % 10]++;
+			
+			//to get sorted array
+			//e.g., if count = {1,0,1,1,0,0,0,0,0,1}
+			//then --- cumulative count is {1,1,2,3,3,3,3,3,3,4}
+			//cumulative count reflects the index in the sorted array
+			for (int i=1; i<10; i++)
+				count[i] += count[i-1];
+			
+			int[] sorted = new int[a.length];
+			for(int i = a.length-1; i >= 0; i--){
+				sorted[count[(a[i]/exp) % 10] - 1] = a[i];
+				count[a[i]/exp % 10]--;
+			}
+			
+			for(int i=0; i < a.length; i++)
+				a[i] = sorted[i];
+		}
+	}
+	
+	//  ***********************************
 }

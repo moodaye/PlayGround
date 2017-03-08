@@ -7,6 +7,47 @@ import org.junit.Test;
 public class SortingTest {
 	
 	@Test
+	public void testRadixSort(){
+		int[] a = {4,3,2,1};
+		Sorting.radixSort(a);
+		int[] expected = {1,2,3,4};
+		assertArrayEquals(expected, a);
+		
+		int[] a2 = {2,1,4,3};
+		Sorting.radixSort(a2);
+		int[] expected2 = {1,2,3,4};
+		assertArrayEquals(expected2, a2);
+		
+		int[] a3 = {1923, 39, 4900, 3091, 233};
+		Sorting.radixSort(a3);
+		int[] expected3 = {39, 233, 1923, 3091, 4900};
+		assertArrayEquals(expected3, a3);
+		
+		int[] a4 = {0};
+		Sorting.radixSort(a4);
+		int[] expected4 = {0};
+		assertArrayEquals(expected4, a4);
+		
+		int[] a5 = {-120, 20, 222, -1};
+		Sorting.radixSort(a5);
+		int[] expected5 = {-120, -1, 20, 222};
+		assertArrayEquals(expected5, a5);
+	}
+	
+	@Test
+	public void testHeapSort1(){
+		int[] a = {4,3,2,1};
+		Sorting.heapSort(a);
+		int[] expected = {1,2,3,4};
+		assertArrayEquals(expected, a);
+		
+		int[] a2 = {2,1,4,3};
+		Sorting.heapSort(a2);
+		int[] expected2 = {1,2,3,4};
+		assertArrayEquals(expected2, a2);
+	}
+	
+	@Test
 	public void testCountingSort1(){
 		int[] a = {4,3,1};
 		Sorting.countingSort(a,  0,  10);
@@ -17,8 +58,19 @@ public class SortingTest {
 		Sorting.countingSort(b, -1, 10);
 		int[] b_expected = {-1,2,2,4,5,10};
 		assertArrayEquals(b_expected, b);
+	}
+	
+	@Test
+	public void testQuickSort(){
+		int[] a = {4,3,1};
+		Sorting.quickSort(a);
+		int[] expected = {1,3,4};
+		assertArrayEquals(expected, a);
 		
-		
+		int[] b = {10,-1, 2, 2, 4, 5};
+		Sorting.quickSort(b);
+		int[] b_expected = {-1,2,2,4,5,10};
+		assertArrayEquals(b_expected, b);
 	}
 	
 	@Test 
