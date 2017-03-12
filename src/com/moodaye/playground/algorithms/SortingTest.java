@@ -41,7 +41,7 @@ public class SortingTest {
 		int[] expected = {1,2,3,4};
 		assertArrayEquals(expected, a);
 		
-		int[] a2 = {2,1,4,3};
+		int[] a2 = {1,2,3,4};
 		Sorting.heapSort(a2);
 		int[] expected2 = {1,2,3,4};
 		assertArrayEquals(expected2, a2);
