@@ -13,19 +13,19 @@ package com.moodaye.playground.algorithms.hackerRank.weekOfCode29;
  */
 public class MinimalDistanceToPi {
 	
-	public final double pi = 3.14159268979323;
+	public final static double pi = 3.14159268979323;
 	
 	private static long computeMDTP(long min,long max){
 	
-		long min = 0L;
+		long min1 = 0L;
 		
-		for(long i=min; i<=max; i++){
+		for(long i=min1; i<=max; i++){
 			double m = i*pi;
 			
 			
 		}
 		
-		return min;
+		return min1;
 	}
 	
 }

@@ -26,14 +26,7 @@ public class Graph {
 	 * @param in
 	 */
 	public Graph(InputStream in){
-		Scanner input = new Scanner(in);
-		while(input.hasNext()){
-<<<<<<< HEAD
-	//		nodes.add(input.nextInt());
-=======
-		//	nodes.add(input.nextInt());
->>>>>>> refs/remotes/origin/February_2017_Week2
-		}
+
 	}
 	
 	public  void addEdge(int u, int v){
