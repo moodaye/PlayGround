@@ -5,7 +5,7 @@ import java.util.Locale;
 import java.io.PrintWriter;
 
 /** Programmer's School #6 */
-// Start Time = 455am
+// Start Time = 455am  End Time = 5:07am (12min)
 public class Chess {
 	void solve(Scanner in, PrintWriter out) {
 		String move = in.next();
