@@ -5,7 +5,7 @@ import java.util.Locale;
 import java.io.PrintWriter;
 
 /** Programmer's School #336 */
-// Start = 1005pm End = 10:12pm
+// Start = 1005pm End = 10:12pm  Time Taken = 7min
 public class Elevator {
 	void solve(Scanner in, PrintWriter out) {
 		String p = in.next();
