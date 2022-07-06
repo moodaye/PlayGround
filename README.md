@@ -1,3 +1,3 @@
-# PlayGround
-Area for various exercises and challenges
-Working on Quiz
+GS1
+GS2
+GS3
